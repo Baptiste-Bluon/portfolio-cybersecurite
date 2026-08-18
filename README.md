@@ -27,10 +27,6 @@ Orientation visée : **audit d'architecture et de configuration**, conformité I
 - **2025-2028** — Alternance, MINORIS Informatique (MSP) — administration systèmes, réseaux et sécurité
 - **2023-2025** — Alternance BTS SIO, BIMP
 
-## Veille et méthode
-
-Notes de lecture et fiches de synthèse sur les référentiels : voir [`/notes`](notes/).
-
 ---
 
 *Tous les livrables d'audit publiés ici sont anonymisés : aucun nom de client, domaine, adresse IP
