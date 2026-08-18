@@ -1,0 +1,61 @@
+<!--
+  Règle       : 100406 - Substitution de compte dans un groupe d'administration
+  Objectif    : détecter le remplacement furtif d'un membre d'un groupe à privilèges
+  Scénario    : un même opérateur retire puis ajoute un membre dans un groupe
+                d'administration tier en moins de 60 secondes
+  MITRE       : T1531 (Account Access Removal), T1098.007 (Privileged Group Modification)
+  Event ID    : 4728 / 4732 / 4756 (ajout), 4729 / 4733 / 4757 (retrait)
+  Dépendances : 100403 (ajout) et 100405 (retrait), reproduites ci-dessous
+  Angle mort  : chacune des deux opérations est légitime prise isolément. Les règles
+                natives les traitent séparément et ne lèvent donc aucune alerte.
+                La corrélation sur subjectUserName + fenêtre de 60 s est ce qui
+                transforme deux événements banals en signal d'appropriation de compte.
+  Testé le    : [DATE] - scénario contrôlé sur AD-SERV-01, résultat : alerte de
+                niveau 14 levée, notification e-mail reçue avec chronologie complète
+  Contexte    : laboratoire de projet annuel (Bachelor 3, ESGI Lyon). Wazuh 4.14,
+                Active Directory sur Windows Server 2022. Aucune donnée client.
+-->
+
+<group name="ad_privilege_escalation,wazuh_custom,">
+
+  <!-- 100403 : ajout privilégié à un groupe admin tier
+       if_group group_changed pour contourner le masquage par la règle native 6014 -->
+  <rule id="100403" level="13">
+    <if_group>group_changed</if_group>
+    <field name="win.system.eventID">^4728$|^4732$|^4756$</field>
+    <field name="win.eventdata.targetUserName">GRP_Admins_T2|GRP_Admins_T1|GRP_Admins_T0</field>
+    <description>[T1098.007] Ajout privilégié au groupe admin tier: $(win.eventdata.targetUserName)</description>
+    <mitre>
+      <id>T1098.007</id>
+    </mitre>
+    <group>ad_privilege_escalation,wazuh_custom,</group>
+  </rule>
+
+  <!-- 100405 : retrait privilégié d'un groupe admin tier
+       détection du sabotage d'un administrateur légitime -->
+  <rule id="100405" level="10">
+    <if_group>group_changed</if_group>
+    <field name="win.system.eventID">^4729$|^4733$|^4757$</field>
+    <field name="win.eventdata.targetUserName">GRP_Admins_T2|GRP_Admins_T1|GRP_Admins_T0</field>
+    <description>[T1531] Retrait privilégié du groupe admin tier: $(win.eventdata.targetUserName) - membre: $(win.eventdata.memberName)</description>
+    <mitre>
+      <id>T1531</id>
+    </mitre>
+    <group>ad_privilege_escalation,ad_account_access_removal,wazuh_custom,</group>
+  </rule>
+
+  <!-- 100406 : substitution admin - corrélation 100405 + 100403 sous 60 s,
+       par le même opérateur (same_field sur subjectUserName) -->
+  <rule id="100406" level="14" frequency="2" timeframe="60">
+    <if_matched_sid>100405</if_matched_sid>
+    <if_sid>100403</if_sid>
+    <same_field>win.eventdata.subjectUserName</same_field>
+    <description>[CORRELATION CRITIQUE] Substitution admin détectée: $(win.eventdata.subjectUserName) a retiré ET ajouté des membres dans groupes admin tier en moins de 60s</description>
+    <mitre>
+      <id>T1531</id>
+      <id>T1098.007</id>
+    </mitre>
+    <group>ad_privilege_escalation,ad_account_takeover,wazuh_custom,</group>
+  </rule>
+
+</group>
