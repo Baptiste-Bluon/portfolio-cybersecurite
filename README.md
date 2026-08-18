@@ -1,6 +1,6 @@
 # Baptiste Bluon — Portfolio sécurité défensive et audit
 
-Étudiant en Master Cybersécurité (ESGI Lyon), en alternance depuis 2022.
+Étudiant en Master Cybersécurité (ESGI Lyon), en alternance depuis 2023.
 Orientation : **audit d'architecture et de configuration**, conformité ISO 27001/27002.
 
 ---
