@@ -24,7 +24,7 @@ Orientation : **audit d'architecture et de configuration**, conformité ISO 2700
 
 - **2026-2028** — Master Cybersécurité, ESGI Lyon (alternance)
 - **2025-2026** — Bachelor 3 Systèmes, Réseaux & Cloud / Sécurité informatique, ESGI Lyon
-- **2025-2027** — Alternance, MINORIS Informatique (MSP) — administration systèmes, réseaux et sécurité
+- **2025-2028** — Alternance, MINORIS Informatique (MSP) — administration systèmes, réseaux et sécurité
 - **2023-2025** — Alternance BTS SIO, BIMP
 
 ## Veille et méthode
