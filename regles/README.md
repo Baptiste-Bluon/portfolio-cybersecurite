@@ -6,7 +6,7 @@ réparties en trois familles : authentification et force brute, intégrité de l
 persistance sur Active Directory.
 
 Les règles publiées ici proviennent d'un laboratoire (infrastructure fictive, projet
-académique). Elles ne contiennent aucune donnée d'environnement client.
+académique).
 
 | Règle | Ce qu'elle détecte | Technique MITRE |
 | --- | --- | --- |
