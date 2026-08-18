@@ -9,7 +9,7 @@
 
   Intérêt de la corrélation
     Chacune des deux opérations est légitime prise isolément. Les règles natives les
-    traitent séparément et ne lèvent donc aucune alerte. La corrélation sur
+  traitent séparément et ne lèvent donc aucune alerte. La corrélation sur
     subjectUserName dans une fenêtre de 60 s est ce qui transforme deux événements
     banals en signal d'appropriation de compte.
 
@@ -27,7 +27,7 @@
 
   Environnement de test
     Laboratoire de projet annuel (Bachelor 3, ESGI Lyon), Active Directory sur
-    Windows Server 2022, Wazuh <VERSION_A_CONFIRMER>. Aucune donnée client.
+    Windows Server 2022, Wazuh 4.14.6. Aucune donnée client.
     Testé le 29/06/2025, scénario contrôlé : retrait puis ajout par le même
     opérateur en moins de 60 s. Résultat : alerte de niveau 14 levée,
     notification e-mail reçue avec la chronologie complète.
