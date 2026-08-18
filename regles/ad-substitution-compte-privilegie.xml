@@ -10,7 +10,7 @@
                 natives les traitent séparément et ne lèvent donc aucune alerte.
                 La corrélation sur subjectUserName + fenêtre de 60 s est ce qui
                 transforme deux événements banals en signal d'appropriation de compte.
-  Testé le    : [DATE] - scénario contrôlé sur AD-SERV-01, résultat : alerte de
+  Testé le    : 29/06/2025 - scénario contrôlé sur AD-SERV-01, résultat : alerte de
                 niveau 14 levée, notification e-mail reçue avec chronologie complète
   Contexte    : laboratoire de projet annuel (Bachelor 3, ESGI Lyon). Wazuh 4.14,
                 Active Directory sur Windows Server 2022. Aucune donnée client.
